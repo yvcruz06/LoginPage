@@ -16,5 +16,10 @@ public class UtilsTest {
         assertEquals(x+y, Utils.adder(x,y));
     }
 
+    @Test
+    public void subtractorTest(){
+        assertEquals(3-2, Utils.subtractor(3,2));
+    }
+
 
 }

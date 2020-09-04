@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">CST438FA2002_inclassGitDemo</string>
+    <string name="login">Login</string>
+    <string name="pw">Password</string>
+    <string name="un">Username</string>
+    <string name="title_acct">Account Login</string>
 </resources>

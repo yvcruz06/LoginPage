@@ -12,6 +12,9 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
+    boolean m1 =  true;
+    private static final String M1ISTRUE = "com.daclink.drew.cst438fa2002_inclassgitdemo";
+
     // input texts and login button initiation
     EditText mEditText1;
     EditText mEditText2;
@@ -32,46 +35,36 @@ public class MainActivity extends AppCompatActivity {
         mButton1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                checkAccount();
+                mEditText1.setTextColor(Color.BLACK);
+                mEditText2.setTextColor(Color.BLACK);
+                String un = mEditText1.getText().toString();
+                String pw = mEditText2.getText().toString();
+                CheckAccount inputUP = new CheckAccount(un, pw);
+                String output = inputUP.checkAccount();
+                toastMaker(output);
             }
         });
     }
 
-    // function checks if account exists
-    public void checkAccount(){
-        String un = mEditText1.getText().toString();
-        String pw = mEditText2.getText().toString();
+    public void toastMaker(String output) {
+        if (output.equals("Success")) {
+            Toast.makeText(this, "Success", Toast.LENGTH_LONG).show();
 
-        String universal_un = "yvonne";
-        String universal_pw = "cruz";
+            //intent new screen
+            Intent intent = MainActivity2.newIntent(MainActivity.this, m1);
+            startActivity(intent);
 
-        if (un.equals(universal_un)) {
-
-            if (pw.equals(universal_pw)) {
-
-                Toast.makeText(this, "Success", Toast.LENGTH_LONG).show();
-
-                //Intent intent = MainActivity.newIntent(MainActivity.this, m1);
-                //startActivity(intent);
-
-            }
-            else {
-                Toast.makeText(this, "Password is incorrect", Toast.LENGTH_LONG).show();
-                mEditText2.setTextColor(Color.RED);
-            }
-        }
-        else if (pw.equals(universal_pw)){
+        } else if (output.equals("Password is incorrect")) {
+            Toast.makeText(this, "Password is incorrect", Toast.LENGTH_LONG).show();
+            mEditText2.setTextColor(Color.RED);
+        } else if (output.equals("Username is incorrect")) {
             Toast.makeText(this, "Username is incorrect", Toast.LENGTH_LONG).show();
             mEditText1.setTextColor(Color.RED);
-
-        }
-        else {
+        } else {
             Toast.makeText(this, "Username & Password are incorrect", Toast.LENGTH_LONG).show();
             mEditText1.setTextColor(Color.RED);
             mEditText2.setTextColor(Color.RED);
-
         }
     }
 }
 
-//new comment

@@ -40,29 +40,32 @@ public class MainActivity extends AppCompatActivity {
                 String un = mEditText1.getText().toString();
                 String pw = mEditText2.getText().toString();
                 CheckAccount inputUP = new CheckAccount(un, pw);
-                String output = inputUP.checkAccount();
-                toastMaker(output);
+                boolean bool_un = inputUP.checkUsername();
+                boolean bool_pw = inputUP.checkPassword();
+                toastMaker(bool_un, bool_pw);
             }
         });
     }
 
-    public void toastMaker(String output) {
-        if (output.equals("Success")) {
+    public void toastMaker(boolean bool_un, boolean bool_pw) {
+        if (bool_un && bool_pw) {
             Toast.makeText(this, "Success", Toast.LENGTH_LONG).show();
 
             //intent new screen
             Intent intent = MainActivity2.newIntent(MainActivity.this, m1);
             startActivity(intent);
 
-        } else if (output.equals("Password is incorrect")) {
-            Toast.makeText(this, "Password is incorrect", Toast.LENGTH_LONG).show();
-            mEditText2.setTextColor(Color.RED);
-        } else if (output.equals("Username is incorrect")) {
-            Toast.makeText(this, "Username is incorrect", Toast.LENGTH_LONG).show();
-            mEditText1.setTextColor(Color.RED);
-        } else {
+        } else if (!bool_un && !bool_pw) {
             Toast.makeText(this, "Username & Password are incorrect", Toast.LENGTH_LONG).show();
             mEditText1.setTextColor(Color.RED);
+            mEditText2.setTextColor(Color.RED);
+
+        } else if (!bool_un) {
+            Toast.makeText(this, "Username is incorrect", Toast.LENGTH_LONG).show();
+            mEditText1.setTextColor(Color.RED);
+
+        } else {
+            Toast.makeText(this, "Password is incorrect", Toast.LENGTH_LONG).show();
             mEditText2.setTextColor(Color.RED);
         }
     }

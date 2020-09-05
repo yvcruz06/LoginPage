@@ -11,26 +11,28 @@ public class CheckAccount {
         password = "c";
     }
 
-    public CheckAccount(String un,  String pw) {
+    public CheckAccount(String un, String pw) {
         username = un;
         password = pw;
     }
 
-    public String checkAccount() {
+    public Boolean checkUsername() {
 
         if (username.equals(login_un)) {
-            if (password.equals(login_pw)) {
-                return "Success";
-            }
-            else {
-                return "Password is incorrect";
-            }
-        }
-        else if (password.equals(login_pw)){
-            return "Username is incorrect";
+            return true;
         }
         else {
-            return "Username & Password are incorrect";
+            return false;
         }
     }
+
+    public Boolean checkPassword() {
+        if (password.equals(login_pw)) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
 }
